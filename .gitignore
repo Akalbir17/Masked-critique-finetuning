@@ -1,0 +1,92 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs and outputs
+*.log
+*.err
+*.out
+logs/
+results/
+wandb/
+
+# Cache and compiled
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+unsloth_compiled_cache/
+.pytest_cache/
+
+# Model checkpoints and large files
+checkpoints/
+models/
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+
+# Data files (keep structure but ignore large files)
+data/*.csv
+data/*.jsonl
+data/*.pkl
+data/*.h5
+data/*.npy
+data/*.npz
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# SLURM outputs
+*.slurm
+slurm-*.out
+slurm-*.err
+
+# Diagnostics
+diagnostics/

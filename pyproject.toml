@@ -1,0 +1,179 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "masked-critique-finetuning"
+version = "0.1.0"
+description = "Masked Critique Fine-tuning for Small Reasoning Models"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Akalbir Singh Chadha", email = "your.email@example.com"},
+    {name = "Chandresh Mallick", email = "your.email@example.com"}
+]
+maintainers = [
+    {name = "Akalbir Singh Chadha", email = "your.email@example.com"},
+    {name = "Chandresh Mallick", email = "your.email@example.com"}
+]
+keywords = [
+    "machine-learning",
+    "deep-learning",
+    "language-models",
+    "reasoning",
+    "fine-tuning",
+    "masked-critique",
+    "mathematical-reasoning"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.30.0",
+    "datasets>=2.12.0",
+    "accelerate>=0.20.0",
+    "bitsandbytes>=0.39.0",
+    "unsloth>=0.1.0",
+    "peft>=0.4.0",
+    "pandas>=1.5.0",
+    "numpy>=1.24.0",
+    "pyyaml>=6.0",
+    "typing-extensions",
+    "tqdm>=4.64.0",
+    "wandb",
+    "tensorboard",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "isort>=5.10.0",
+    "flake8>=5.0.0",
+    "pre-commit>=2.20.0",
+]
+distributed = [
+    "deepspeed>=0.9.0",
+    "flash-attn>=2.0.0",
+]
+all = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "isort>=5.10.0",
+    "flake8>=5.0.0",
+    "pre-commit>=2.20.0",
+    "deepspeed>=0.9.0",
+    "flash-attn>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/masked-critique-finetuning"
+Documentation = "https://github.com/yourusername/masked-critique-finetuning#readme"
+Repository = "https://github.com/yourusername/masked-critique-finetuning.git"
+"Bug Tracker" = "https://github.com/yourusername/masked-critique-finetuning/issues"
+"Paper" = "https://github.com/yourusername/masked-critique-finetuning/blob/main/docs/paper.pdf"
+
+[project.scripts]
+mcf = "btsft.main:main"
+
+[tool.setuptools.packages.find]
+include = ["btsft*"]
+
+[tool.setuptools.package-data]
+btsft = ["config/*.yaml"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["btsft"]
+known_third_party = ["torch", "transformers", "datasets", "accelerate"]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    "*.egg-info",
+    ".venv",
+    "venv",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--verbose",
+    "--tb=short",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.coverage.run]
+source = ["btsft"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]

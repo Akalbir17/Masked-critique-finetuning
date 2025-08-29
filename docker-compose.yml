@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  masked-critique-finetuning:
+    build: .
+    container_name: mcf-training
+    volumes:
+      # Mount data directory
+      - ./data:/app/data
+      # Mount config directory
+      - ./config:/app/config
+      # Mount logs directory
+      - ./logs:/app/logs
+      # Mount results directory
+      - ./results:/app/results
+      # Mount checkpoints directory
+      - ./checkpoints:/app/checkpoints
+    environment:
+      - PYTHONPATH=/app
+      - CUDA_VISIBLE_DEVICES=0
+    working_dir: /app
+    command: ["mcf", "--help"]
+    profiles:
+      - default
+      - help
+
+  mcf-training:
+    build: .
+    container_name: mcf-training-run
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./results:/app/results
+      - ./checkpoints:/app/checkpoints
+    environment:
+      - PYTHONPATH=/app
+      - CUDA_VISIBLE_DEVICES=0
+    working_dir: /app
+    command: ["python", "examples/basic_training.py"]
+    profiles:
+      - training
+
+  mcf-data-loader:
+    build: .
+    container_name: mcf-data-loader
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PYTHONPATH=/app
+    working_dir: /app
+    command: ["python", "data/data_loader.py"]
+    profiles:
+      - data
+
+  mcf-tests:
+    build: .
+    container_name: mcf-tests
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app
+    working_dir: /app
+    command: ["pytest", "tests/", "-v"]
+    profiles:
+      - test
+
+  mcf-lint:
+    build: .
+    container_name: mcf-lint
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app
+    working_dir: /app
+    command: ["bash", "-c", "black --check . && isort --check-only . && flake8 ."]
+    profiles:
+      - lint
+
+  mcf-format:
+    build: .
+    container_name: mcf-format
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONPATH=/app
+    working_dir: /app
+    command: ["bash", "-c", "black . && isort ."]
+    profiles:
+      - format
+
+networks:
+  default:
+    name: mcf-network
+
+volumes:
+  data:
+    driver: local
+  config:
+    driver: local
+  logs:
+    driver: local
+  results:
+    driver: local
+  checkpoints:
+    driver: local

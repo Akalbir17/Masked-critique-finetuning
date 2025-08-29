@@ -1,0 +1,39 @@
+model_name: "deepscaler_fullft_all_updated"
+threshold: 0.2
+bf_beta: 0.05
+
+# Checkpoints
+checkpoint: "agentica-org/DeepScaleR-1.5B-Preview"
+tokenizer_name: "agentica-org/DeepScaleR-1.5B-Preview"
+trainer_checkpoint: null
+base_model_checkpoint: "agentica-org/DeepScaleR-1.5B-Preview"
+
+# Dataset
+dataset_train: "/home1/akalbirs/blurred-thoughts-SFT/sanitized_data_v4.csv"
+max_length: 16384
+
+# Training parameters
+save_steps: 128
+batch_size: 1
+accumulation_iter: 8  # effective batch size = 8
+epochs: 3
+lr: 5e-5 #used 7e-5 got better results
+warmup_steps: 500 #used 100 got better results
+weight_decay: 0.01
+
+
+# Directories
+logging_dir: "./logs/fullft/mydata/updated_training"
+output_dir: "./results/fullft/mydata/updated_training"
+cache_dir: "/project2/jieyuz_1540/.cache/huggingface"
+
+# Data handling
+train_test_split: 0.1
+skip: 0
+take: null
+num_workers: 24
+
+# Other settings
+device: "cuda"
+# response_template: "<|assistant|>\n"
+response_template: "<|start_header_id|>assistant<|end_header_id|>\n\n"
