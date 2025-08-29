@@ -22,7 +22,7 @@
 
 ### Data Generation Pipeline
 
-![Figure 1: Data Generation](Fig%201.png)
+![Figure 1: Data Generation](Fig1.png)
 
 *Figure 1: Data Generation - The pipeline shows how LIMO/LIMR dataset is processed by a Base Model to generate multiple Chain of Thought (CoT) and Answer (A) pairs for each question, which are then refined by a Teacher component to produce critiques and improved answers, resulting in a structured dataset for training.*
 
@@ -88,9 +88,9 @@ def apply_masked_critique_masking(labels, threshold=0.2):
 
 #### Sample Input and Output
 
-![Figure 3: Sample Input and Output](Figure%203.png)
+![Figure 2: Sample Input and Output](Figure3.png)
 
-*Figure 3: Sample Input and Output - Shows sample input X and sample output Y, where tokens are masked. The left column displays the user question and language model output, while the right column shows the structured output with masked tokens (highlighted in red) in the critique and reasoning sections, demonstrating the masked critique fine-tuning process.*
+*Figure 2: Sample Input and Output - Shows sample input X and sample output Y, where tokens are masked. The left column displays the user question and language model output, while the right column shows the structured output with masked tokens (highlighted in red) in the critique and reasoning sections, demonstrating the masked critique fine-tuning process.*
 
 ### Distributed Training Pipeline
 
@@ -180,9 +180,9 @@ sbatch run_mcf.slurm
 
 ### Training Process
 
-![Figure 2: Training](figure%202.png)
+![Figure 3: Training](figure2.png)
 
-*Figure 2: Training - The supervised learning process where a Base Model takes user questions and Chain of Thought (CoT) as input, generates critiques and reasoning chains, and compares them against Teacher critiques while ignoring masked tokens during loss calculation and backpropagation.*
+*Figure 3: Training - The supervised learning process where a Base Model takes user questions and Chain of Thought (CoT) as input, generates critiques and reasoning chains, and compares them against Teacher critiques while ignoring masked tokens during loss calculation and backpropagation.*
 
 ### Masked Critique Training Mechanism
 
@@ -368,7 +368,7 @@ def run_hyperparameter_search():
 
 ### Inference Process
 
-![Figure 4: Inference](fig%204.png)
+![Figure 4: Inference](fig4.png)
 
 *Figure 4: Inference - The inference process where a user question (X) is fed into the Masked Critique Fine-tuned Model, which produces reasoning chains and an answer (y_hat).*
 
@@ -477,18 +477,6 @@ isort btsft/
 4. Ensure all tests pass (`pytest`)
 5. Submit a pull request
 
-## 📚 Citation
-
-If you use this work in your research, please cite:
-
-```bibtex
-@inproceedings{ChadhaMallick2025MaskedCritique,
-  title={Improving Reasoning of Small Reasoning Models with Masked Critique Fine-Tuning},
-  author={Akalbir Singh Chadha and Chandresh Mallick},
-  year={2025}
-}
-```
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -504,7 +492,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **GitHub Issues**: [Report bugs or request features](https://github.com/yourusername/blurred-thoughts-SFT/issues)
 - **Discussions**: [Join the community](https://github.com/yourusername/blurred-thoughts-SFT/discussions)
-- **Email**: your.email@example.com
+- **Email**: akalbirsinghchadha@gmail.com
 
 ---
 
